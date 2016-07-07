@@ -14,12 +14,15 @@ except Exception as e:
     print("Error on get_board: {}".format(e))
     sys.exit(1)
 
-pin_buzzer = board.pins[12]
+pin_buzzer = board.pins[12]  # GPIO 18
 pin_buzzer.mode = pingo.OUT
 
-pin_led = board.pins[16]
+pin_led = board.pins[16]  # GPIO 23
 pin_led.mode = pingo.OUT
 
+red_led = board.pins[11]  # GPIO 17
+blue_led = board.pins[15]  # GPIO 22 
+green_led = board.pins[13]  # GPIO 27
 
 @app.route('/')
 def index():
