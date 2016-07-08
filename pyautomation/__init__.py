@@ -21,8 +21,18 @@ pin_led = board.pins[16]  # GPIO 23
 pin_led.mode = pingo.OUT
 
 red_led = board.pins[11]  # GPIO 17
+red_led.mode = pingo.OUT
 blue_led = board.pins[15]  # GPIO 22 
+blue_led.mode = pingo.OUT
 green_led = board.pins[13]  # GPIO 27
+green_led.mode = pingo.OUT
+
+
+def revert_state(pin):
+    if not pin.state or pin.state == 'LOW':
+        pin.hi()
+    else:
+        pin.lo()
 
 @app.route('/')
 def index():
@@ -31,18 +41,25 @@ def index():
 
 @app.route('/buzzer', methods=['POST'])
 def buzzer():
-    if not pin_buzzer.state or pin_buzzer.state == 'LOW':
-        pin_buzzer.hi()
-    else:
-        pin_buzzer.lo()
+    revert_state(pin_buzzer)
     return redirect(url_for('index'))
 
 
 @app.route('/led', methods=['POST'])
 def led():
-    if not pin_led.state or pin_led.state == 'LOW':
-        pin_led.hi()
-    else:
-        pin_led.lo()
+    revert_state(pin_led)
+    return redirect(url_for('index'))
+
+@app.route('/rgb/<color>', methods=['POST'])
+def rgb(color):
+    if color == "red":
+        revert_state(red_led)
+
+    elif color == "green":
+        revert_state(green_led)
+
+    elif color == "blue":
+        revert_state(blue_led)
+
     return redirect(url_for('index'))
 
