@@ -16,23 +16,24 @@ except Exception as e:
 
 pin_buzzer = board.pins[12]  # GPIO 18
 pin_buzzer.mode = pingo.OUT
+pin_buzzer.lo()
 
 pin_led = board.pins[16]  # GPIO 23
 pin_led.mode = pingo.OUT
+pin_led.lo()
 
 red_led = board.pins[11]  # GPIO 17
 red_led.mode = pingo.OUT
+red_led.lo()
+
 blue_led = board.pins[15]  # GPIO 22 
 blue_led.mode = pingo.OUT
+blue_led.lo()
+
 green_led = board.pins[13]  # GPIO 27
 green_led.mode = pingo.OUT
+green_led.lo()
 
-
-def revert_state(pin):
-    if not pin.state or pin.state == 'LOW':
-        pin.hi()
-    else:
-        pin.lo()
 
 @app.route('/')
 def index():
@@ -41,25 +42,25 @@ def index():
 
 @app.route('/buzzer', methods=['POST'])
 def buzzer():
-    revert_state(pin_buzzer)
+    pin_buzzer.toggle()
     return redirect(url_for('index'))
 
 
 @app.route('/led', methods=['POST'])
 def led():
-    revert_state(pin_led)
+    pin_led.toggle()
     return redirect(url_for('index'))
 
 @app.route('/rgb/<color>', methods=['POST'])
 def rgb(color):
     if color == "red":
-        revert_state(red_led)
+        red_led.toggle()
 
     elif color == "green":
-        revert_state(green_led)
+        green_led.toggle()
 
     elif color == "blue":
-        revert_state(blue_led)
+        blue_led.toggle()
 
     return redirect(url_for('index'))
 
