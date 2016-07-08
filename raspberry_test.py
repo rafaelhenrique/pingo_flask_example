@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-import time
 import sys
-import math
 
 import pingo
 
@@ -12,4 +10,3 @@ try:
 except Exception as e:
     print("Error on get_board: {}".format(e))
     sys.exit(1)
-

@@ -1,6 +1,5 @@
 # -*- coding; utf-8 -*-
-import time
-
+import sys
 import pingo
 from flask import Flask, render_template, redirect, url_for
 
@@ -26,7 +25,7 @@ red_led = board.pins[11]  # GPIO 17
 red_led.mode = pingo.OUT
 red_led.lo()
 
-blue_led = board.pins[15]  # GPIO 22 
+blue_led = board.pins[15]  # GPIO 22
 blue_led.mode = pingo.OUT
 blue_led.lo()
 
@@ -51,6 +50,7 @@ def led():
     pin_led.toggle()
     return redirect(url_for('index'))
 
+
 @app.route('/rgb/<color>', methods=['POST'])
 def rgb(color):
     if color == "red":
@@ -63,4 +63,3 @@ def rgb(color):
         blue_led.toggle()
 
     return redirect(url_for('index'))
-
