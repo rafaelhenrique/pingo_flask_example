@@ -26,7 +26,7 @@ We need assemble this "structure":
 Inside your S.O. on Raspberry clone this project:
 
 ```
-$ git --recursive clone git@github.com:rafaelhenrique/pingo_flask_example.git
+$ git clone git@github.com:rafaelhenrique/pingo_flask_example.git --recursive
 ```
 
 Create an virtualenv (i prefer [virtualenv-wrapper](https://virtualenvwrapper.readthedocs.org/en/latest/ "virtualenv-wrapper")):
